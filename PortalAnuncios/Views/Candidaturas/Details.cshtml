@@ -1,4 +1,4 @@
-﻿@model ModelagemBd.Anuncio
+﻿@model ModelagemBd.Candidatura
 
 @{
     ViewData["Title"] = "Details";
@@ -7,26 +7,26 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Anuncio</h4>
+    <h4>Candidatura</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Anunciante)
+            @Html.DisplayNameFor(model => model.Anuncio)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Anunciante.Nome)
+            @Html.DisplayFor(model => model.Anuncio.Descricao)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Titulo)
+            @Html.DisplayNameFor(model => model.Candidato)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Titulo)
+            @Html.DisplayFor(model => model.Candidato.Nome)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.Status)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
+            @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
 </div>
@@ -34,3 +34,5 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@await Html.PartialAsync("HistoricoIndex.cshtml", Model.Historico)

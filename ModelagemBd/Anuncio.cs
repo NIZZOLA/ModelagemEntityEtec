@@ -9,7 +9,11 @@ namespace ModelagemBd
 
         [ForeignKey("Anunciante")]
         public int AnuncianteId { get; set; }
-        public Cliente? Anunciante { get; set; }   
+        public Cliente? Anunciante { get; set; }
+
+        public string Titulo { get; set; }
+
+        public string Descricao { get; set; }
 
     }
 }

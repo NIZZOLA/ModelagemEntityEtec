@@ -63,7 +63,7 @@ namespace PortalAnuncios.Controllers
             {
                 var cli = new Cliente()
                 {
-                    Name = cliente.Name,
+                    Nome = cliente.Name,
                     Enderecos = new List<Endereco>()
                 };
                 cli.Enderecos.Add(new Endereco() { Rua = cliente.Rua });

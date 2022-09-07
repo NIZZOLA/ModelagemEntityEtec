@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortalAnuncios.Data;
 
@@ -11,9 +12,10 @@ using PortalAnuncios.Data;
 namespace PortalAnuncios.Migrations
 {
     [DbContext(typeof(PortalAnunciosContext))]
-    partial class PortalAnunciosContextModelSnapshot : ModelSnapshot
+    [Migration("20220906234409_historico2")]
+    partial class historico2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

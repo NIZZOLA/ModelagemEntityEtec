@@ -48,7 +48,7 @@ namespace PortalAnuncios.Controllers
         // GET: Anuncios/Create
         public IActionResult Create()
         {
-            ViewData["AnuncianteId"] = new SelectList(_context.Set<Cliente>(), "Id", "Name");
+            ViewData["AnuncianteId"] = new SelectList(_context.Cliente, "Id", "Nome");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace PortalAnuncios.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AnuncianteId")] Anuncio anuncio)
+        public async Task<IActionResult> Create([Bind("Id,AnuncianteId,Titulo,Descricao")] Anuncio anuncio)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace PortalAnuncios.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnuncianteId"] = new SelectList(_context.Set<Cliente>(), "Id", "Name", anuncio.AnuncianteId);
+            ViewData["AnuncianteId"] = new SelectList(_context.Cliente, "Id", "Nome", anuncio.AnuncianteId);
             return View(anuncio);
         }
 
@@ -82,7 +82,7 @@ namespace PortalAnuncios.Controllers
             {
                 return NotFound();
             }
-            ViewData["AnuncianteId"] = new SelectList(_context.Set<Cliente>(), "Id", "Name", anuncio.AnuncianteId);
+            ViewData["AnuncianteId"] = new SelectList(_context.Cliente, "Id", "Nome", anuncio.AnuncianteId);
             return View(anuncio);
         }
 
@@ -91,7 +91,7 @@ namespace PortalAnuncios.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AnuncianteId")] Anuncio anuncio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AnuncianteId,Titulo,Descricao")] Anuncio anuncio)
         {
             if (id != anuncio.Id)
             {
@@ -118,7 +118,7 @@ namespace PortalAnuncios.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnuncianteId"] = new SelectList(_context.Set<Cliente>(), "Id", "Name", anuncio.AnuncianteId);
+            ViewData["AnuncianteId"] = new SelectList(_context.Cliente, "Id", "Nome", anuncio.AnuncianteId);
             return View(anuncio);
         }
 

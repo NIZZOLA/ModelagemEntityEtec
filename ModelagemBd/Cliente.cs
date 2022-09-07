@@ -12,7 +12,7 @@ namespace ModelagemBd
         [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
         public ICollection<Endereco>? Enderecos { get; set; }
         public ICollection<Anuncio>? Anuncios { get; set; }

@@ -22,5 +22,7 @@ namespace ModelagemBd
         public Cliente? Candidato { get; set; }
 
         public StatusEnum Status { get; set; }
+
+        public ICollection<CandidaturaHistorico>? Historico { get; set; }
     }
 }

@@ -33,7 +33,11 @@ namespace PortalAnuncios.Data
                 .WithMany(e => e.Candidaturas)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
-
+            modelBuilder
+                .Entity<CandidaturaHistorico>()
+                .HasOne(e => e.Candidatura)
+                .WithMany(e => e.Historico)
+                .OnDelete(DeleteBehavior.ClientCascade);
         }
 
         public DbSet<ModelagemBd.Anuncio> Anuncio { get; set; } = default!;
@@ -42,6 +46,8 @@ namespace PortalAnuncios.Data
 
         public DbSet<ModelagemBd.Endereco>? Endereco { get; set; }
 
+        public DbSet<ModelagemBd.Candidatura>? Candidatura { get; set; }
 
+        public DbSet<ModelagemBd.CandidaturaHistorico>? CandidaturaHistorico { get; set; }
     }
 }
