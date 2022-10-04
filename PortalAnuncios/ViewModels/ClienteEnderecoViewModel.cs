@@ -1,10 +1,10 @@
-﻿namespace PortalAnuncios.ViewModels
+﻿namespace PortalAnuncios.ViewModels;
+
+public class ClienteEnderecoViewModel
 {
-    public class ClienteEnderecoViewModel
-    {
 
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public string Rua { get; set; }
-    }
+    public string Rua { get; set; }
+
 }
