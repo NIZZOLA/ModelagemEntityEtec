@@ -13,6 +13,12 @@ namespace PortalAnuncios.Data
             : base(options)
         {
         }
+        public DbSet<ModelagemBd.Anuncio> Anuncio { get; set; } = default!;
+        public DbSet<ModelagemBd.Cliente>? Cliente { get; set; }
+        public DbSet<ModelagemBd.Endereco>? Endereco { get; set; }
+        public DbSet<ModelagemBd.Candidatura>? Candidatura { get; set; }
+        public DbSet<ModelagemBd.CandidaturaHistorico>? CandidaturaHistorico { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -39,15 +45,5 @@ namespace PortalAnuncios.Data
                 .WithMany(e => e.Historico)
                 .OnDelete(DeleteBehavior.ClientCascade);
         }
-
-        public DbSet<ModelagemBd.Anuncio> Anuncio { get; set; } = default!;
-
-        public DbSet<ModelagemBd.Cliente>? Cliente { get; set; }
-
-        public DbSet<ModelagemBd.Endereco>? Endereco { get; set; }
-
-        public DbSet<ModelagemBd.Candidatura>? Candidatura { get; set; }
-
-        public DbSet<ModelagemBd.CandidaturaHistorico>? CandidaturaHistorico { get; set; }
     }
 }

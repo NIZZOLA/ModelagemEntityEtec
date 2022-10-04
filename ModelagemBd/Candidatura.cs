@@ -12,7 +12,6 @@ namespace ModelagemBd
     {
         [Key]
         public int Id { get; set; }
-
         [ForeignKey("Anuncio")]
         public int AnuncioId { get; set; }
         public Anuncio? Anuncio { get; set; }
