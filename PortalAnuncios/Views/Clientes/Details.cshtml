@@ -17,6 +17,21 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
     </dl>
+
+    @foreach (var item in Model.Enderecos)
+    {
+        
+     <dl class="row">
+        <dt class = "col-sm-2">
+            Endereço
+        </dt>
+        <dd class = "col-sm-10">
+            @item.Rua    
+        </dd>
+    </dl>
+    }
+
+    
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

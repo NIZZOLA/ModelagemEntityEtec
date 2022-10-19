@@ -11,6 +11,6 @@ namespace ModelagemBd
         Enviado = 1,
         AguardaAbertura = 2,
         Visualizado = 3,
-        Contatato=4
+        Contatato = 4
     }
 }

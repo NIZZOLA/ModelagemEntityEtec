@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelagemBd", "ModelagemBd.csproj", "{88EBC8E4-76A5-4220-AFED-7DA5856F563A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelagemBd", "ModelagemBd\ModelagemBd.csproj", "{88EBC8E4-76A5-4220-AFED-7DA5856F563A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalAnuncios", "..\PortalAnuncios\PortalAnuncios.csproj", "{BF17C058-1726-4BE5-85D6-B3CA70CA8223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortalAnuncios", "PortalAnuncios\PortalAnuncios.csproj", "{BF17C058-1726-4BE5-85D6-B3CA70CA8223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

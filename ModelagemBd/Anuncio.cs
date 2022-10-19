@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelagemBd
 {
-    public class Anuncio {
+    public class Anuncio
+    {
         [Key]
         public int Id { get; set; }
 

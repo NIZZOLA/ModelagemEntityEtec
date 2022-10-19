@@ -9,7 +9,7 @@ namespace PortalAnuncios.Data
 {
     public class PortalAnunciosContext : DbContext
     {
-        public PortalAnunciosContext (DbContextOptions<PortalAnunciosContext> options)
+        public PortalAnunciosContext(DbContextOptions<PortalAnunciosContext> options)
             : base(options)
         {
         }

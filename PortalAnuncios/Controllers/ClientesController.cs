@@ -23,9 +23,9 @@ namespace PortalAnuncios.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-              return _context.Cliente != null ? 
-                          View(await _context.Cliente.ToListAsync()) :
-                          Problem("Entity set 'PortalAnunciosContext.Cliente'  is null.");
+            return _context.Cliente != null ?
+                        View(await _context.Cliente.ToListAsync()) :
+                        Problem("Entity set 'PortalAnunciosContext.Cliente'  is null.");
         }
 
         // GET: Clientes/Details/5
@@ -36,7 +36,7 @@ namespace PortalAnuncios.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Cliente
+            var cliente = await _context.Cliente.Include(a => a.Enderecos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cliente == null)
             {
@@ -157,14 +157,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Cliente.Remove(cliente);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClienteExists(int id)
         {
-          return (_context.Cliente?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Cliente?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

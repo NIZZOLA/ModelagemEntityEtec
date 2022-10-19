@@ -66,7 +66,7 @@ namespace PortalAnuncios.Controllers
             {
                 candidatura.Historico = new List<CandidaturaHistorico>();
                 candidatura.Historico.Add(new CandidaturaHistorico()
-                        { DataDoStatus = DateTime.Now, Status = candidatura.Status });
+                { DataDoStatus = DateTime.Now, Status = candidatura.Status });
                 _context.Add(candidatura);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -172,14 +172,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Candidatura.Remove(candidatura);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CandidaturaExists(int id)
         {
-          return (_context.Candidatura?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Candidatura?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

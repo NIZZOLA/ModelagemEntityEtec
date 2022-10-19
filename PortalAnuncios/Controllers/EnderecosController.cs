@@ -155,14 +155,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Endereco.Remove(endereco);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EnderecoExists(int id)
         {
-          return (_context.Endereco?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Endereco?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
