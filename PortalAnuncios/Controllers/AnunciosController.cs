@@ -155,14 +155,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Anuncio.Remove(anuncio);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AnuncioExists(int id)
         {
-          return (_context.Anuncio?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Anuncio?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
