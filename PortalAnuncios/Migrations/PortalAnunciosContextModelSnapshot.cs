@@ -17,7 +17,7 @@ namespace PortalAnuncios.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -35,17 +35,19 @@ namespace PortalAnuncios.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnuncianteId");
 
-                    b.ToTable("Anuncio");
+                    b.ToTable("Anuncios", (string)null);
                 });
 
             modelBuilder.Entity("ModelagemBd.Candidatura", b =>
@@ -62,6 +64,9 @@ namespace PortalAnuncios.Migrations
                     b.Property<int>("CandidatoId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ClienteId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -71,7 +76,9 @@ namespace PortalAnuncios.Migrations
 
                     b.HasIndex("CandidatoId");
 
-                    b.ToTable("Candidatura");
+                    b.HasIndex("ClienteId");
+
+                    b.ToTable("Candidaturas", (string)null);
                 });
 
             modelBuilder.Entity("ModelagemBd.CandidaturaHistorico", b =>
@@ -95,7 +102,7 @@ namespace PortalAnuncios.Migrations
 
                     b.HasIndex("CandidaturaId");
 
-                    b.ToTable("CandidaturaHistorico");
+                    b.ToTable("CandidaturasHistoricos", (string)null);
                 });
 
             modelBuilder.Entity("ModelagemBd.Cliente", b =>
@@ -106,13 +113,24 @@ namespace PortalAnuncios.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("ModelagemBd.Endereco", b =>
@@ -123,18 +141,43 @@ namespace PortalAnuncios.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("Rua")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Endereco");
+                    b.ToTable("ClientesEnderecos", (string)null);
                 });
 
             modelBuilder.Entity("ModelagemBd.Anuncio", b =>
@@ -151,16 +194,20 @@ namespace PortalAnuncios.Migrations
             modelBuilder.Entity("ModelagemBd.Candidatura", b =>
                 {
                     b.HasOne("ModelagemBd.Anuncio", "Anuncio")
-                        .WithMany()
+                        .WithMany("Candidaturas")
                         .HasForeignKey("AnuncioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ModelagemBd.Cliente", "Candidato")
-                        .WithMany("Candidaturas")
+                        .WithMany()
                         .HasForeignKey("CandidatoId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ModelagemBd.Cliente", null)
+                        .WithMany("Candidaturas")
+                        .HasForeignKey("ClienteId");
 
                     b.Navigation("Anuncio");
 
@@ -187,6 +234,11 @@ namespace PortalAnuncios.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("ModelagemBd.Anuncio", b =>
+                {
+                    b.Navigation("Candidaturas");
                 });
 
             modelBuilder.Entity("ModelagemBd.Candidatura", b =>

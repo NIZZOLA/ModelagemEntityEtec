@@ -16,22 +16,19 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Nome)
         </dd>
-    </dl>
-
-    @foreach (var item in Model.Enderecos)
-    {
-        
-     <dl class="row">
         <dt class = "col-sm-2">
-            Endereço
+            @Html.DisplayNameFor(model => model.Cpf)
         </dt>
         <dd class = "col-sm-10">
-            @item.Rua    
+            @Html.DisplayFor(model => model.Cpf)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
-    }
-
-    
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

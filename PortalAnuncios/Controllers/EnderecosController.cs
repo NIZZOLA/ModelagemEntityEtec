@@ -48,7 +48,7 @@ namespace PortalAnuncios.Controllers
         // GET: Enderecos/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Name");
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace PortalAnuncios.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,Rua")] Endereco endereco)
+        public async Task<IActionResult> Create([Bind("Id,ClienteId,Rua,Numero,Bairro,Cidade,Estado,Cep")] Endereco endereco)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace PortalAnuncios.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Name", endereco.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf", endereco.ClienteId);
             return View(endereco);
         }
 
@@ -82,7 +82,7 @@ namespace PortalAnuncios.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Name", endereco.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf", endereco.ClienteId);
             return View(endereco);
         }
 
@@ -91,7 +91,7 @@ namespace PortalAnuncios.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Rua")] Endereco endereco)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Rua,Numero,Bairro,Cidade,Estado,Cep")] Endereco endereco)
         {
             if (id != endereco.Id)
             {
@@ -118,7 +118,7 @@ namespace PortalAnuncios.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Name", endereco.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf", endereco.ClienteId);
             return View(endereco);
         }
 
@@ -155,14 +155,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Endereco.Remove(endereco);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EnderecoExists(int id)
         {
-            return (_context.Endereco?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Endereco?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

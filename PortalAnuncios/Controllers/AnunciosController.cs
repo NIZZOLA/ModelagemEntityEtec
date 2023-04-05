@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ModelagemBd;
@@ -155,14 +151,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Anuncio.Remove(anuncio);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AnuncioExists(int id)
         {
-            return (_context.Anuncio?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Anuncio?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

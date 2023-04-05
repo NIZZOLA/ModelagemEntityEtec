@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ModelagemBd;
 using PortalAnuncios.Data;
-using PortalAnuncios.ViewModels;
 
 namespace PortalAnuncios.Controllers
 {
@@ -23,9 +22,9 @@ namespace PortalAnuncios.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return _context.Cliente != null ?
-                        View(await _context.Cliente.ToListAsync()) :
-                        Problem("Entity set 'PortalAnunciosContext.Cliente'  is null.");
+              return _context.Cliente != null ? 
+                          View(await _context.Cliente.ToListAsync()) :
+                          Problem("Entity set 'PortalAnunciosContext.Cliente'  is null.");
         }
 
         // GET: Clientes/Details/5
@@ -36,7 +35,7 @@ namespace PortalAnuncios.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Cliente.Include(a => a.Enderecos)
+            var cliente = await _context.Cliente
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cliente == null)
             {
@@ -57,17 +56,11 @@ namespace PortalAnuncios.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ClienteEnderecoViewModel cliente)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Email")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                var cli = new Cliente()
-                {
-                    Nome = cliente.Name,
-                    Enderecos = new List<Endereco>()
-                };
-                cli.Enderecos.Add(new Endereco() { Rua = cliente.Rua });
-                _context.Add(cli);
+                _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -95,7 +88,7 @@ namespace PortalAnuncios.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Cpf,Email")] Cliente cliente)
         {
             if (id != cliente.Id)
             {
@@ -157,14 +150,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Cliente.Remove(cliente);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClienteExists(int id)
         {
-            return (_context.Cliente?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Cliente?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

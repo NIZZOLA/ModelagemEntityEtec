@@ -37,7 +37,6 @@ namespace PortalAnuncios.Controllers
             var candidatura = await _context.Candidatura
                 .Include(c => c.Anuncio)
                 .Include(c => c.Candidato)
-                .Include(c => c.Historico)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (candidatura == null)
             {
@@ -50,8 +49,8 @@ namespace PortalAnuncios.Controllers
         // GET: Candidaturas/Create
         public IActionResult Create()
         {
-            ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Titulo");
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome");
+            ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao");
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf");
             return View();
         }
 
@@ -64,15 +63,12 @@ namespace PortalAnuncios.Controllers
         {
             if (ModelState.IsValid)
             {
-                candidatura.Historico = new List<CandidaturaHistorico>();
-                candidatura.Historico.Add(new CandidaturaHistorico()
-                { DataDoStatus = DateTime.Now, Status = candidatura.Status });
                 _context.Add(candidatura);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao", candidatura.AnuncioId);
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome", candidatura.CandidatoId);
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf", candidatura.CandidatoId);
             return View(candidatura);
         }
 
@@ -90,7 +86,7 @@ namespace PortalAnuncios.Controllers
                 return NotFound();
             }
             ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao", candidatura.AnuncioId);
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome", candidatura.CandidatoId);
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf", candidatura.CandidatoId);
             return View(candidatura);
         }
 
@@ -111,13 +107,6 @@ namespace PortalAnuncios.Controllers
                 try
                 {
                     _context.Update(candidatura);
-                    var historico = new CandidaturaHistorico()
-                    {
-                        CandidaturaId = candidatura.Id,
-                        DataDoStatus = DateTime.Now,
-                        Status = candidatura.Status
-                    };
-                    _context.Add(historico);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -134,7 +123,7 @@ namespace PortalAnuncios.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao", candidatura.AnuncioId);
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome", candidatura.CandidatoId);
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf", candidatura.CandidatoId);
             return View(candidatura);
         }
 
@@ -172,14 +161,14 @@ namespace PortalAnuncios.Controllers
             {
                 _context.Candidatura.Remove(candidatura);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CandidaturaExists(int id)
         {
-            return (_context.Candidatura?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Candidatura?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

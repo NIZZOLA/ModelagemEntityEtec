@@ -10,7 +10,6 @@ namespace ModelagemBd
 {
     public class Candidatura
     {
-        [Key]
         public int Id { get; set; }
 
         [ForeignKey("Anuncio")]
@@ -20,7 +19,6 @@ namespace ModelagemBd
         [ForeignKey("Candidato")]
         public int CandidatoId { get; set; }
         public Cliente? Candidato { get; set; }
-
         public StatusEnum Status { get; set; }
 
         public ICollection<CandidaturaHistorico>? Historico { get; set; }

@@ -15,29 +15,7 @@ namespace PortalAnuncios.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder
-                .Entity<Endereco>()
-                .HasOne(e => e.Cliente)
-                .WithMany(e => e.Enderecos)
-                .OnDelete(DeleteBehavior.ClientCascade);
-
-            modelBuilder
-                .Entity<Anuncio>()
-                .HasOne(e => e.Anunciante)
-                .WithMany(e => e.Anuncios)
-                .OnDelete(DeleteBehavior.ClientCascade);
-
-            modelBuilder
-                .Entity<Candidatura>()
-                .HasOne(e => e.Candidato)
-                .WithMany(e => e.Candidaturas)
-                .OnDelete(DeleteBehavior.ClientCascade);
-
-            modelBuilder
-                .Entity<CandidaturaHistorico>()
-                .HasOne(e => e.Candidatura)
-                .WithMany(e => e.Historico)
-                .OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
 
         public DbSet<ModelagemBd.Anuncio> Anuncio { get; set; } = default!;

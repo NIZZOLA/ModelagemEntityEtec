@@ -10,13 +10,9 @@ namespace ModelagemBd
 {
     public class CandidaturaHistorico
     {
-        [Key]
         public int Id { get; set; }
-
-        [ForeignKey("Candidatura")]
         public int CandidaturaId { get; set; }
         public Candidatura? Candidatura { get; set; }
-
         public DateTime DataDoStatus { get; set; }
         public StatusEnum Status { get; set; }
     }
