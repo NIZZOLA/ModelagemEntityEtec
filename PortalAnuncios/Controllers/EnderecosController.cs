@@ -48,7 +48,7 @@ namespace PortalAnuncios.Controllers
         // GET: Enderecos/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf");
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace PortalAnuncios.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf", endereco.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", endereco.ClienteId);
             return View(endereco);
         }
 
@@ -82,7 +82,7 @@ namespace PortalAnuncios.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf", endereco.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", endereco.ClienteId);
             return View(endereco);
         }
 
@@ -118,7 +118,7 @@ namespace PortalAnuncios.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Cpf", endereco.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", endereco.ClienteId);
             return View(endereco);
         }
 

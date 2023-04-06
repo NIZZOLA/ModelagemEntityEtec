@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ModelagemBd;
@@ -50,7 +46,7 @@ namespace PortalAnuncios.Controllers
         public IActionResult Create()
         {
             ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao");
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf");
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome");
             return View();
         }
 
@@ -68,7 +64,7 @@ namespace PortalAnuncios.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao", candidatura.AnuncioId);
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf", candidatura.CandidatoId);
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome", candidatura.CandidatoId);
             return View(candidatura);
         }
 
@@ -86,7 +82,7 @@ namespace PortalAnuncios.Controllers
                 return NotFound();
             }
             ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao", candidatura.AnuncioId);
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf", candidatura.CandidatoId);
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome", candidatura.CandidatoId);
             return View(candidatura);
         }
 
@@ -123,7 +119,7 @@ namespace PortalAnuncios.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AnuncioId"] = new SelectList(_context.Anuncio, "Id", "Descricao", candidatura.AnuncioId);
-            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Cpf", candidatura.CandidatoId);
+            ViewData["CandidatoId"] = new SelectList(_context.Cliente, "Id", "Nome", candidatura.CandidatoId);
             return View(candidatura);
         }
 

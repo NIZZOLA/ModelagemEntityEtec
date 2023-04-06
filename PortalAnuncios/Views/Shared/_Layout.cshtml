@@ -25,6 +25,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @{
+
+                            var controllerTypes = AppDomain.CurrentDomain.GetAssemblies()
+                            .SelectMany(assembly => assembly.GetTypes())
+                            .Where(type => typeof(Controller).IsAssignableFrom(type) && !type.IsAbstract && type.Name != "Controller")
+                            .ToList();
+
+                            var menuItems = new List<dynamic>();
+
+                            foreach (var controllerType in controllerTypes)
+                            {
+                                var controllerName = controllerType.Name.Replace(nameof(Controller), "");
+                                var menuItem = new { Controller = controllerName, Action = nameof(Index) };
+                                menuItems.Add(menuItem);
+                            }
+                            @foreach (var menuItem in menuItems)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="@menuItem.Controller" asp-action="@menuItem.Action">@menuItem.Controller</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
