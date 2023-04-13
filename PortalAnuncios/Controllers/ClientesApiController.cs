@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ModelagemBd;
 using PortalAnuncios.Data;
 
@@ -18,7 +19,8 @@ namespace PortalAnuncios.Controllers
         [HttpGet]
         public IEnumerable<Cliente> GetCliente()
         {
-            return _context.Cliente;
+            var result = _context.Cliente.Include(a => a.Enderecos).ToList();
+            return result;
         }
 
         // GET: api/Clientes/5
